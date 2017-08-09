@@ -4,6 +4,36 @@
   <strong>Name:</strong>
   <%= @category.name %>
 </p>
+<%= form_with(model: [@category,@product]) do |form| %>
+  <%= form.hidden_field :category_id, value: @category.id %>
+  <%= form.label :name %>
+  <%= form.text_field :name %>
+  <%= form.label :price %>
+  <%= form.text_field :price %>
+  <%= form.submit %>
+
+<% end %>
+
+<table>
+  <thead>
+    <tr>
+      <th>Name</th>
+      <th>Precio</th>
+    </tr>
+  </thead>
+
+  <tbody>
+    <% @category.products.each do |product| %>
+      <tr>
+        <td><%= product.name %></td>
+        <td><%= product.price %></td>
+      </tr>
+    <% end %>
+  </tbody>
+</table>
+
+
+
 
 <%= link_to 'Edit', edit_category_path(@category) %> |
 <%= link_to 'Back', categories_path %>
